@@ -5,10 +5,9 @@ import java.util.HashMap;
  * Created by joe on 9/17/16.
  */
 public class Customer {
-    String userName = "joe";
-    String password = "1234";
-    double balance = 500.00;
-    private ArrayList<Customer>userDetails=new ArrayList<>();
+    private String userName;
+    private String password;
+    private double balance;
 
     public Customer(String userName,String password,double balance){
         this.userName=userName;
@@ -16,4 +15,27 @@ public class Customer {
         this.balance=balance;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }
