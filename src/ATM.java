@@ -5,13 +5,16 @@ import java.util.HashMap;
  */
 public class ATM {
 
+    //testing
     String userName = "joe";
     String password = "1234";
     double balance = 500.00;
+
     String currencyStd = "0";//default is 0, USD. 1 is euros
     String usStandard = "USD ($)";
     String euroStandard = "EUR (€)";
 
+    Customer customer = new Customer(userName,password,balance);
 
     public ATM() {
 
@@ -21,14 +24,14 @@ public class ATM {
 
         //set for testing purposes
         System.out.println("Please enter your user name:");
-        //String name=Main.keyboard.nextLine();
-        String name = "joe";
+        String name=Main.keyboard.nextLine();
+        //String name = "joe";
 
         System.out.println("Please enter your password");
         //String pword=Main.keyboard.nextLine();
         String pword = "1234";
 
-        if (name.equals(userName) && pword.equals(password)) {
+        if (name.equals(customer.userName) && pword.equals(customer.password)) {
             System.out.println("Access granted");
         } else {
             System.out.println("Credentials not valid. Please enter your username and password:");
@@ -61,15 +64,14 @@ public class ATM {
                     try {
                         withdrawMoney();
                     } catch (Exception e) {
-                        //TODO:clean this up before pushing to git
-                        System.out.println("YOU AINT GOT NO MONYE");
+                        System.out.println("Insufficent funds");
                     }
                     break;
                 case "4":
                     currencySwitch();
                     break;
                 case "5":
-                    System.out.printf("You have been successfully logged out, %s", userName + "\n");
+                    System.out.printf("You have been successfully logged out, %s", customer.userName + "\n");
                     cancel = "yes";
                     break;
                 default:
@@ -83,16 +85,16 @@ public class ATM {
 
     public void checkBalance() {
         if (currencyStd.equals("0")) {
-            System.out.printf("Your balance is: %s %s", usStandard, balance + "\n");
+            System.out.printf("Your balance is: %s %s", usStandard, customer.balance + "\n");
         } else {
-            System.out.printf("Your balance is %s %s", euroStandard, balance + "\n");
+            System.out.printf("Your balance is %s %s", euroStandard, customer.balance + "\n");
         }
     }
 
     public void addMoney() {
         System.out.println("Please enter the amount you wish to deposit:");
         double amount = Integer.parseInt(Main.keyboard.nextLine());
-        balance = balance + amount;
+        customer.balance = customer.balance + amount;
         System.out.println("Your account is now:" + balance);
     }
 
@@ -104,10 +106,10 @@ public class ATM {
             throw new Exception(amount + " is not valid");
         }
 
-        if (amount > balance) {
+        if (amount > customer.balance) {
             throw new Exception("The attempted withdraw exceeded your balance");
         } else {
-            balance = balance - amount;
+            customer.balance = customer.balance - amount;
             System.out.println("Your balance is now: $" + balance);
             System.out.println("Please take your money");
         }
@@ -137,11 +139,11 @@ public class ATM {
     }//end
 
     public double convertDollarsToEuros() {
-        return (balance = balance*.9);
+        return (customer.balance = customer.balance*.9);
     }
 
     public double convertEurosToDollars() {
-        return (balance = balance * 1.10);
+        return (customer.balance = customer.balance * 1.10);
     }
 
 }
